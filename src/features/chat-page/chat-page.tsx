@@ -50,7 +50,7 @@ export const ChatPage: FC<ChatPageProps> = (props) => {
       />
       <ChatMessageContainer ref={current}>
         <ChatMessageContentArea>
-          {messages.map((message) => {
+          {messages.filter((m) => session?.user?.isAdmin || (m.role != "tool" && m.role != "function")).map((message) => {
             return (
               <ChatMessageArea
                 key={message.id}
