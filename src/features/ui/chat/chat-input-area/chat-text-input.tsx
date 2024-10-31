@@ -8,7 +8,7 @@ export const ChatTextInput = React.forwardRef<
     <textarea
       ref={ref}
       className="p-4 w-full focus:outline-none bg-transparent resize-none "
-      placeholder="Type your message here..."
+      placeholder="Type your message here... \nRemember, AI can make mistakes - always verify. \nDo not upload Restricted information."
       {...props}
     />
   );
