@@ -103,7 +103,15 @@ export const ChatMessageArea = (props: {
       </div>
       <div className="flex flex-col gap-2 flex-1 px-10">
         <div className="prose prose-slate dark:prose-invert whitespace-break-spaces prose-p:leading-relaxed prose-pre:p-0 max-w-none">
-          {props.children}
+          {props.children;
+          const parser = new DOMParser();
+          const htmlText = `<div><a href="#some-url">Url link</a></div>`;
+          let content = parser.parseFromString(htmlText, "text/html");
+          const anchors = content.getElementsByTagName('a');
+          Array.from(anchors).forEach(a => { 
+              a.setAttribute("target", "_blank");
+          })
+          console.log(content.body.innerHTML); // Here it is your new string}
         </div>
       </div>
     </div>
