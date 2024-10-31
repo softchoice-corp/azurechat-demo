@@ -9,8 +9,9 @@ const ChatMessageContentArea: ForwardRefRenderFunction<
   ChatMessageContentAreaProps
 > = (props, ref) => {
   useEffect(() => {
-    const links = ref.current?.querySelectorAll('a'); // Select all anchor tags in the current ref
-    if (links) {
+    // Check if ref.current is not null
+    if (ref.current) {
+      const links = ref.current.querySelectorAll('a'); // Select all anchor tags in the current ref
       links.forEach(link => {
         link.setAttribute('target', '_blank'); // Open in new tab
         link.setAttribute('rel', 'noopener noreferrer'); // Security measure
