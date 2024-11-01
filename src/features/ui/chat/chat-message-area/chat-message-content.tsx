@@ -1,32 +1,34 @@
-import React, { ForwardRefRenderFunction, useEffect } from "react";
-
+import React, { useEffect, useRef, forwardRef } from "react";
+ 
 interface ChatMessageContentAreaProps {
   children?: React.ReactNode;
 }
-
-const ChatMessageContentArea: ForwardRefRenderFunction<
+ 
+const ChatMessageContentArea: React.ForwardRefRenderFunction<
   HTMLDivElement,
   ChatMessageContentAreaProps
 > = (props, ref) => {
+  const internalRef = useRef<HTMLDivElement>(null);
+  const combinedRef = ref || internalRef;
+ 
   useEffect(() => {
-    // Check if ref.current is not null
-    if (ref.current) {
-      const links = ref.current.querySelectorAll('a'); // Select all anchor tags in the current ref
+    if (combinedRef && combinedRef.current) {
+      const links = combinedRef.current.querySelectorAll("a");
       links.forEach(link => {
-        link.setAttribute('target', '_blank'); // Open in new tab
-        link.setAttribute('rel', 'noopener noreferrer'); // Security measure
+        link.setAttribute("target", "_blank");
+        link.setAttribute("rel", "noopener noreferrer");
       });
     }
-  }, [props.children]); // Run effect when children change
-
+  }, [props.children]);
+ 
   return (
-    <div
-      ref={ref}
+<div
+      ref={combinedRef}
       className="container max-w-3xl relative min-h-screen pb-[240px] pt-16 flex flex-col gap-16"
-    >
+>
       {props.children}
-    </div>
+</div>
   );
 };
-
-export default React.forwardRef(ChatMessageContentArea);
+ 
+export default forwardRef(ChatMessageContentArea);
